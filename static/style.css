@@ -1,0 +1,57 @@
+html {
+    background-color: #121312;
+    color: white;
+}
+
+nav {
+    text-align: center;
+}
+
+nav > * {
+    padding: 10px;
+    display: inline;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+}
+
+li > a {
+    color: white;
+}
+
+.divider {
+    width: 40%;
+}
+
+section {
+    text-align: center;
+}
+
+input {
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: #121312;
+    color: white;
+}
+
+input:focus {
+    outline: none;
+}
+
+#options {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: bottom;
+}
+
+#options > * {
+    padding: 0px 10px;
+    margin: 0;
+}}
