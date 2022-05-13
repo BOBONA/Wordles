@@ -1,0 +1,11 @@
+reddit.com
+testflight.apple.com
+apps.apple.com
+twitter.com
+docs.google.com
+bit.ly
+cutt.ly
+t.me
+en.wikipedia.org
+imgur.com
+google.com
