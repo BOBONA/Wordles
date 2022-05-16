@@ -63,7 +63,7 @@ def is_wordle_url(url, blacklist):
     parts = url.split('/')
     if parts[2] in blacklist:  # has invalid site
         return False
-    if '.' in parts[-1] and len(parts) > 3:  # url is to a file
+    if '.' in parts[-1] and len(parts) > 3 and parts[-1].split('.')[-1] != 'html':  # url is to a file
         return False
     for part in parts:
         if len(part) > 20:

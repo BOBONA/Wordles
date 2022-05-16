@@ -1,16 +1,17 @@
 <!doctype html>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='font-icons/css/fontello.css') }}">
+{% block javascript %}{% endblock %}
 <nav>
     <h1 id="logo">Wordles</h1>
     <ul>
-        <li><a href="{{ url_for('app.about') }}">About</a></li>
+        <li><a class="clickable" href="{{ url_for('app.index') }}">Home</a></li>
+        <li><a class="clickable" href="{{ url_for('app.random') }}" target="_blank">Random</a></li>
+        <li><a class="clickable" href="{{ url_for('app.about') }}">About</a></li>
     </ul>
 </nav>
 <hr class="divider">
 <section>
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
     {% block content %}{% endblock %}
 </section>

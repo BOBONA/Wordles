@@ -2,10 +2,39 @@
 
 {% block title %}Wordles{% endblock %}
 
+{% block javascript %}<script src="{{ url_for('static', filename='app.js') }}"></script>{% endblock %}
+
 {% block content %}
 <div id="options">
-    <input type="text" id="search" placeholder="Search"/>
-    <a>Favorites: </a>
-    <input type="checkbox" id="favorites" placeholder="Favorites"/>
+    <input oninput="update();" type="search" id="search" placeholder="Search"/>
+    <p>Favorites: </p>
+    <input onchange="update();" type="checkbox" id="favorites" placeholder="Favorites" checked/>
+    <p>Sort: </p>
+    <select onchange="update();" id="sort" class="clickable">
+        <option value="alphabet">A-Z</option>
+        <option value="like">Popularity</option>
+        <option value="new">New</option>
+    </select>
+    <button onclick="swapSort();" id="sortDirection" class="clickable">▲</button>
+</div>
+<br>
+<div id="wordles">
+</div>
+<div id="infoModal">
+    <div id="modalContent">
+        <span id="modalClose" class="clickable">&times;</span>
+        <h2 id="modalHeader">Wordle Info</h2>
+        <b>URL:</b>
+        <span id="modalUrl"></span>
+        <br>
+        <b>Data:</b>
+        <span id="modalData"></span>
+        <br>
+        <b>Unix Date:</b>
+        <span id="modalDate"></span>
+        <br>
+        <b>Likes:</b>
+        <span id="modalLikes"></span>
+    </div>
 </div>
 {% endblock %}

@@ -18,9 +18,10 @@ nav ul {
 
 li {
     display: inline;
+    margin: 5px;
 }
 
-li > a {
+a {
     color: white;
 }
 
@@ -48,10 +49,94 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    text-align: bottom;
 }
 
 #options > * {
-    padding: 0px 10px;
-    margin: 0;
-}}
+    margin: 0px 5px;
+}
+
+#search, #checkbox {
+    margin-right: 15px;
+}
+
+#data {
+    display: none;
+}
+
+.wordle {
+    display: flex;
+    width: 40em;
+    border: solid white;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+}
+
+.grow {
+    flex: 1;
+}
+
+.wordle > a {
+    text-decoration: none;
+}
+
+#sort, button {
+    border: none;
+    background-color: #121312;
+    color: white;
+}
+
+#sortDirection {
+    margin-left: 0px;
+    padding: 0px;
+}
+
+#infoModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#modalContent {
+    background-color: #121312;
+    margin: 15% auto;
+    padding: 10px;
+    border: 1px solid #333;
+    width: 50%;
+    border-radius: 5px;
+    text-align: left;
+    overflow-wrap: anywhere;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+#modalHeader {
+    text-align: center;
+}
+
+#modalClose {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+.clickable:hover {
+    color: #bababa;
+    cursor: pointer;
+}
