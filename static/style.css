@@ -140,3 +140,8 @@ input:focus {
     color: #bababa;
     cursor: pointer;
 }
+
+.content {
+    width: 40em;
+    margin: 0 auto;
+}

@@ -2,6 +2,8 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='font-icons/css/fontello.css') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='/images/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='/images/favicon-16x16.png') }}">
 {% block javascript %}{% endblock %}
 <nav>
     <h1 id="logo">Wordles</h1>

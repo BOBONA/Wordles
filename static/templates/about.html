@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>About</h1>
+    <p><b>What is this?</b> This site is an automated directory for urls of <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> variants. It has standard searching and sorting features. Users can star their favorite Wordle variants for easy access. Minimalism is the goal for the UI and functionality; this is a simple app for a simple use case.</p>
+    <p><b>How does this work?</b> The backend is made with <a href="https://flask.palletsprojects.com/en/2.1.x/">Flask</a>, the frontend is made with basic HTML/CSS/JavaScript. The server is hosted for free on <a href="https://www.heroku.com/">Heroku</a>. Wordle variants are periodically scraped from a few sources; the info/search text and dates are taken from these sources and may not accurately reflect the Wordle variant. The data has a lot of issues but will probably be improved. Likes are stored in the server according to IP address.</p>
+    <p><b>Who made this?</b> I made this! For fun! As a Wordle enthusiast, who at the time of writing this did Wordle, Quordle, and Symble daily, I wanted a simple directory of Wordle variants. The goal was to have it, with some fine-tuning, collect data by itself. I'm aware that some Wordle variant directories already exist, but I still wanted to give this a go. Here's a link to my GitHub Pages which has a small but growing list of projects I'd like to share: <a href="https://bobona.github.io/">bobona.github.io</a>.</p>
+</div>
+{% endblock %}

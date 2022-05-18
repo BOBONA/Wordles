@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.sql import func
 
 from flaskr.db import Base
 
@@ -7,6 +9,7 @@ class Wordle(Base):
     __tablename__ = 'wordles'
     id = Column(Integer, primary_key=True)
     url = Column(String(200), unique=True, nullable=False)
+    likes = Column(Integer, default=0)
     data = Column(String(200), nullable=False)
     date = Column(Integer, nullable=False)
     source = Column(Integer, ForeignKey('sources.id'))
@@ -47,3 +50,18 @@ class Blacklist(Base):
 
     def __repr__(self):
         return f'<Site {self.site!r}>'
+
+
+class IpAddress(Base):
+    __tablename__ = 'addresses'
+    id = Column(Integer, primary_key=True)
+    address = Column(String(15), unique=True, nullable=False)
+    likes = Column(ARRAY(Integer, ForeignKey('wordles.id')))
+    date = Column(DateTime(timezone=True), server_default=func.now())
+
+    def __init__(self, address):
+        self.address = address
+        self.likes = []
+
+    def __repr__(self):
+        return f'<Address {self.address!r}>'
