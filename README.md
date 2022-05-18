@@ -22,10 +22,10 @@ Environment variables:
 ```bash
 set FLASK_APP=flaskr
 set FLASK_ENV=<environment>
+set DATABASE_URL=<postgres database url>
 set WDL_REDDIT_ID=<reddit client id>
 set WDL_REDDIT_SECRET=<reddit client secret>
 set WDL_SECRET_KEY=<secret key for security>
-set WDL_DATABASE=<postgres database url>
 set WDL_ADDRESS_LIMIT=<limit for addresses stored, in case of database limits>
 ```
 
