@@ -27,9 +27,10 @@ set WDL_REDDIT_ID=<reddit client id>
 set WDL_REDDIT_SECRET=<reddit client secret>
 set WDL_SECRET_KEY=<secret key for security>
 set WDL_ADDRESS_LIMIT=<limit for addresses stored, in case of database limits>
+set WDL_SOURCES=<sources list>
 ```
 
-static/config/sources.txt
+Sources list example:
 
 ```txt
 reddit wordle

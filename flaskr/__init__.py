@@ -9,7 +9,6 @@ from . import app as main_app, api, db, sources
 
 STATIC_PATH = './static/'
 BLACKLIST = STATIC_PATH + 'config/site_blacklist.txt'
-SOURCES = STATIC_PATH + 'config/sources.txt'
 
 
 def create_app():
@@ -68,22 +67,23 @@ def update_blacklist():
 @with_appcontext
 def fetch_wordles():
     def fetch():
-        with open(SOURCES, 'r') as s:
-            session = db.db_session
-            with open(BLACKLIST, 'r') as b:
-                blacklist = b.read().splitlines()
-            lines = s.read().splitlines()
-            for line in lines:
-                source_data = line.split(' ')
-                if len(source_data) >= 2 and source_data[0] and source_data[1]:
-                    source_type, name = source_data
-                    source = Source.query.filter_by(source_type=source_type, name=name).first()
-                    if source is None:
-                        source = Source(name, source_type, 0)
-                        session.add(source)
-                        session.commit()
-                    sources.get(source_type)(source, session, current_app.config, blacklist)
-                session.commit()
+        source_list = current_app.config['SOURCES']
+        print(source_list)
+        session = db.db_session
+        with open(BLACKLIST, 'r') as b:
+            blacklist = b.read().splitlines()
+        lines = source_list.splitlines()
+        for line in lines:
+            source_data = line.split(' ')
+            if len(source_data) >= 2 and source_data[0] and source_data[1]:
+                source_type, name = source_data
+                source = Source.query.filter_by(source_type=source_type, name=name).first()
+                if source is None:
+                    source = Source(name, source_type, 0)
+                    session.add(source)
+                    session.commit()
+                sources.get(source_type)(source, session, current_app.config, blacklist)
+            session.commit()
     print('Fetching wordles...')
     attempt_multiple(fetch, 10, Exception)
 
@@ -91,4 +91,6 @@ def fetch_wordles():
 @click.command()
 @with_appcontext
 def init_db():
+    print('Initializing database...')
     db.init_db()
+    print('SUCCESS')
