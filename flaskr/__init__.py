@@ -35,9 +35,9 @@ def attempt_multiple(func, times, exception):
         try:
             func()
             success = True
-        except exception:
+        except exception as e:
             print(f'Attempt {i + 1}/10 failed, trying again')
-            print(exception)
+            print(e)
             i += 1
     if success:
         print('SUCCESS')
