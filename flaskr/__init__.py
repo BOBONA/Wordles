@@ -36,7 +36,8 @@ def attempt_multiple(func, times, exception):
             func()
             success = True
         except exception:
-            print(f'Attempt ${i + 1}/10 failed, trying again')
+            print(f'Attempt {i + 1}/10 failed, trying again')
+            print(exception)
             i += 1
     if success:
         print('SUCCESS')
@@ -68,7 +69,6 @@ def update_blacklist():
 def fetch_wordles():
     def fetch():
         source_list = current_app.config['SOURCES']
-        print(source_list)
         session = db.db_session
         with open(BLACKLIST, 'r') as b:
             blacklist = b.read().splitlines()
