@@ -1,6 +1,10 @@
 # Wordles
 
-Wordles is a Flask web app that automatically collects urls for Wordle variants. It uses a few sources, including Wordle subreddits.
+Wordles is a Flask web app that automatically collects urls for Wordle variants. It uses a few sources, including Wordle subreddits. An instance is hosted [here](https://wordle-directory.herokuapp.com/).
+
+## Disclaimer
+
+The method used to scrape Wordle variant urls is still very inaccurate. The list contains many incorrect urls and currently misses correct urls as well. I plan to do some work on this.
 
 ## Run
 
