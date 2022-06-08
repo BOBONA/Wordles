@@ -40,18 +40,6 @@ class Source(Base):
         return f'<Source {self.name!r}>'
 
 
-class Blacklist(Base):
-    __tablename__ = 'blacklist'
-    id = Column(Integer, primary_key=True)
-    site = Column(String(100), unique=True)
-
-    def __init__(self, site):
-        self.site = site
-
-    def __repr__(self):
-        return f'<Site {self.site!r}>'
-
-
 class IpAddress(Base):
     __tablename__ = 'addresses'
     id = Column(Integer, primary_key=True)

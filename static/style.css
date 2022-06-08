@@ -80,6 +80,8 @@ input:focus {
 
 .wordle > a {
     text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #sort, button {

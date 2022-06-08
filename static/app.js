@@ -90,6 +90,12 @@ window.onload = function() {
     direction = document.getElementById("sortDirection");
     sortDirection = 0;
     pageLoaded = true;
+    window.addEventListener("keydown", function (e) {
+        if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+            e.preventDefault();
+            search.focus();
+        }
+    });
     setupInfoModal();
     update();
 }

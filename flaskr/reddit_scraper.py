@@ -1,4 +1,3 @@
-import os
 import re
 
 import praw
@@ -47,6 +46,7 @@ def scrape_submissions(reddit, submissions, blacklist):
 
 
 def normalize_url(url):
+    url = url.split('?')[0]
     if url.endswith('/'):
         url = url[:-1]  # remove trailing /
     i = url.find('#')
@@ -56,19 +56,20 @@ def normalize_url(url):
     if parts[2].startswith('www.'):
         parts[2] = parts[2][4:]
         url = '/'.join(parts)
-    return url
+    return url[:200].lower()
 
 
 def is_wordle_url(url, blacklist):
     parts = url.split('/')
-    if parts[2] in blacklist:  # has invalid site
+    if get_base_site(url) in blacklist:  # has invalid site
         return False
     if '.' in parts[-1] and len(parts) > 3 and parts[-1].split('.')[-1] != 'html':  # url is to a file
         return False
-    for part in parts:
-        if len(part) > 20:
-            return False
     return 'le' in url
+
+
+def get_base_site(url):
+    return '.'.join(url.split('/')[2].split('.')[-2:])
 
 
 def retrieve_submission_ids(subreddit, after):
@@ -76,12 +77,3 @@ def retrieve_submission_ids(subreddit, after):
                   params={'subreddit': subreddit, 'after': after,
                           'sort_type': 'created_utc', 'sort': 'asc', 'fields': 'id', 'size': '100'})
     return ['t3_' + obj['id'] for obj in res.json()['data']]
-
-
-if __name__ == '__main__':
-    r = authorize(os.environ.get('REDDIT_ID'), os.environ.get('REDDIT_SECRET'))
-    date = int(r.subreddit('wordle').created_utc)
-    ids = retrieve_submission_ids('wordle', date)
-    with open('wordle_url_blacklist.txt', 'r') as file:
-        black = file.read().splitlines()
-    scrape_submissions(r, ids, black)

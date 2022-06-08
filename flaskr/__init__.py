@@ -4,7 +4,8 @@ import click
 from flask import Flask, current_app
 from flask.cli import with_appcontext
 
-from flaskr.models import Blacklist, Source, Wordle
+from flaskr.models import Source, Wordle
+from flaskr.reddit_scraper import normalize_url, is_wordle_url
 from . import app as main_app, api, db, sources
 
 STATIC_PATH = './static/'
@@ -22,7 +23,7 @@ def create_app():
     app.register_blueprint(main_app.bp)
     app.register_blueprint(api.bp)
     db.init_app(app)
-    app.cli.add_command(update_blacklist)
+    app.cli.add_command(verify_wordles)
     app.cli.add_command(fetch_wordles)
     app.cli.add_command(init_db)
     return app
@@ -47,20 +48,24 @@ def attempt_multiple(func, times, exception):
 
 @click.command()
 @with_appcontext
-def update_blacklist():
+def verify_wordles():
     def update():
         session = db.db_session
         with open(BLACKLIST, 'r') as b:
             lines = b.read().splitlines()
-            for line in lines:
-                url = Blacklist.query.filter(Blacklist.site == line).first()
-                if not url:
-                    for wordle in Wordle.query.all():
-                        if wordle.url.split('/')[2] == line:
-                            session.delete(wordle)
-                    session.add(Blacklist(line))
+            for wordle in Wordle.query.all():
+                new = normalize_url(wordle.url)
+                if new != wordle.url:
+                    exists = Wordle.query.filter_by(url=new).first()
+                    if exists:
+                        session.delete(wordle)
+                        session.commit()
+                    else:
+                        wordle.url = new
+                if not is_wordle_url(wordle.url, lines):
+                    session.delete(wordle)
         session.commit()
-    print('Updating blacklist...')
+    print('Verifying wordles...')
     attempt_multiple(update, 10, Exception)
 
 
