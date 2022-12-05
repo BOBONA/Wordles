@@ -1,0 +1,5 @@
+runtime: python37
+entrypoint: gunicorn 'flaskr:create_app()'
+
+includes:
+  - env_variables.yaml
